@@ -2,25 +2,79 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1C1F34;
+
+  /* Brand Colors */
+  --primary: #006BFF;
+  --primary-foreground: #ffffff;
+
+  --secondary: #EAF3FF;
+  --secondary-foreground: #1C1F34;
+
+  --accent-start: #2D7CFF;
+  --accent-end: #006BFF;
+
+  --navy: #1C1F34;
+  --gray-blue: #6B7280;
+  --border-color: #E4E7EB;
+
+  /* Status */
+  --success: #00C853;
+  --warning: #FFC107;
+  --danger: #E53935;
+  --info: #2196F3;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-navy: var(--navy);
+  --color-gray-blue: var(--gray-blue);
+  --color-border: var(--border-color);
+
+  --color-accent-start: var(--accent-start);
+  --color-accent-end: var(--accent-end);
+  --color-success: var(--success);
+
+  --font-sans: var(--font-inter);
+}
+
+@theme {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 40s linear infinite;
+  will-change: transform;
 }
