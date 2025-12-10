@@ -37,7 +37,7 @@ export function Testimonials() {
     ];
 
     return (
-        <section id="testimonials" className="py-20 lg:py-28 bg-[#0A0F1E] text-white overflow-hidden relative">
+        <section id="testimonials" className="py-20 lg:py-28 bg-background dark:bg-[#0A0F1E] text-foreground dark:text-white overflow-hidden relative">
             {/* Background effects */}
             <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
                 <div className="absolute right-0 top-0 w-96 h-96 bg-blue-500 rounded-full blur-[120px]" />
@@ -55,7 +55,7 @@ export function Testimonials() {
                         Testimonials
                     </motion.h2>
                     <motion.p
-                        className="text-lg text-gray-400"
+                        className="text-lg text-gray-500 dark:text-gray-400"
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -67,14 +67,14 @@ export function Testimonials() {
 
                 <div className="relative flex overflow-hidden group">
                     {/* Gradient Masks */}
-                    <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#0A0F1E] to-transparent z-10 pointer-events-none" />
-                    <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#0A0F1E] to-transparent z-10 pointer-events-none" />
+                    <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background dark:from-[#0A0F1E] to-transparent z-10 pointer-events-none" />
+                    <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background dark:from-[#0A0F1E] to-transparent z-10 pointer-events-none" />
 
                     <div className="flex animate-scroll gap-6 w-max hover:[animation-play-state:paused] py-4">
                         {[...testimonials, ...testimonials, ...testimonials].map((testimonial, i) => (
                             <div
                                 key={i}
-                                className="w-[350px] flex-shrink-0 bg-[#0F1629] border border-[#1E293B] rounded-2xl p-6 hover:border-[#2D7CFF]/50 transition-all duration-300 group/card"
+                                className="w-[350px] flex-shrink-0 bg-white dark:bg-[#0F1629] border border-border dark:border-[#1E293B] rounded-2xl p-6 hover:border-[#2D7CFF]/50 transition-all duration-300 group/card shadow-sm dark:shadow-none"
                             >
                                 {/* Company Logo Badge */}
                                 <div className="flex items-center gap-3 mb-4">
@@ -82,18 +82,18 @@ export function Testimonials() {
                                         {testimonial.companyLogo}
                                     </div>
                                     <div>
-                                        <div className="font-bold text-white text-sm">{testimonial.author}</div>
-                                        <div className="text-xs text-gray-400">{testimonial.role}</div>
+                                        <div className="font-bold text-foreground dark:text-white text-sm">{testimonial.author}</div>
+                                        <div className="text-xs text-gray-500 dark:text-gray-400">{testimonial.role}</div>
                                     </div>
                                 </div>
 
                                 {/* Quote */}
-                                <p className="text-sm text-gray-300 leading-relaxed mb-4">
+                                <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
                                     "{testimonial.quote}"
                                 </p>
 
                                 {/* Company Name */}
-                                <div className="text-xs text-gray-500 font-medium">
+                                <div className="text-xs text-gray-400 dark:text-gray-500 font-medium">
                                     {testimonial.company}
                                 </div>
                             </div>

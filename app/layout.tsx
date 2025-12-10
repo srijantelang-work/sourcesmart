@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 
@@ -30,12 +31,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${satoshi.variable}`}>
-      <body
-        className={`antialiased`}
-      >
-        <SmoothScroll />
-        {children}
+      <body className={`antialiased`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <SmoothScroll />
+          {children}
+        </ThemeProvider>
       </body>
-    </html>
+    </html >
   );
 }

@@ -1,33 +1,81 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #ffffff;
-  --foreground: #1C1F34;
+  --foreground: #09090b;
 
-  /* Brand Colors */
-  --primary: #006BFF;
+  /* Premium Cards */
+  --card: #ffffff;
+  --card-foreground: #09090b;
+  --popover: #ffffff;
+  --popover-foreground: #09090b;
+
+  /* Brand Colors - Vibrant Blue */
+  --primary: #2563eb;
   --primary-foreground: #ffffff;
 
-  --secondary: #EAF3FF;
-  --secondary-foreground: #1C1F34;
+  --secondary: #f4f4f5;
+  --secondary-foreground: #18181b;
 
-  --accent-start: #2D7CFF;
-  --accent-end: #006BFF;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
 
-  --navy: #1C1F34;
-  --gray-blue: #6B7280;
-  --border-color: #E4E7EB;
+  --accent: #f4f4f5;
+  --accent-foreground: #18181b;
 
-  /* Status */
-  --success: #00C853;
-  --warning: #FFC107;
-  --danger: #E53935;
-  --info: #2196F3;
+  --destructive: #ef4444;
+  --destructive-foreground: #fafafa;
+
+  --border: #e4e4e7;
+  --input: #e4e4e7;
+  --ring: #2563eb;
+
+  /* Gradients */
+  --accent-gradient-start: #3b82f6;
+  --accent-gradient-end: #8b5cf6;
+}
+
+.dark {
+  --background: #020617;
+  /* Deep rich slate/black */
+  --foreground: #fafafa;
+
+  --card: #09090b;
+  /* Slightly lighter than bg */
+  --card-foreground: #fafafa;
+  --popover: #09090b;
+  --popover-foreground: #fafafa;
+
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+
+  --secondary: #1e293b;
+  --secondary-foreground: #fafafa;
+
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+
+  --accent: #1e293b;
+  --accent-foreground: #fafafa;
+
+  --destructive: #7f1d1d;
+  --destructive-foreground: #fafafa;
+
+  --border: #1e293b;
+  --input: #1e293b;
+  --ring: #3b82f6;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
 
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
@@ -35,24 +83,23 @@
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
 
-  --color-navy: var(--navy);
-  --color-gray-blue: var(--gray-blue);
-  --color-border: var(--border-color);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
 
-  --color-accent-start: var(--accent-start);
-  --color-accent-end: var(--accent-end);
-  --color-success: var(--success);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
 
   --font-sans: var(--font-satoshi);
 }
 
-@theme {
-  /* --font-sans: var(--font-geist-sans); */
-  /* --font-mono: var(--font-geist-mono); */
-}
-
 html {
-  scroll-behavior: smooth;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -64,6 +111,34 @@ body {
   font-family: var(--font-satoshi), system-ui, sans-serif;
 }
 
+/* Glassmorphism Utilities */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass {
+  background: rgba(2, 6, 23, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-card {
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.05) 100%);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* Text Glow */
+.text-glow {
+  text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+}
+
+/* Infinite Scroll Animation */
 @keyframes scroll {
   0% {
     transform: translateX(0);

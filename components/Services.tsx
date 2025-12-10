@@ -8,12 +8,12 @@ import { cn } from "@/lib/utils";
 
 export function Services() {
     return (
-        <section id="services" className="py-20 lg:py-32 bg-gray-50/50">
+        <section id="services" className="py-20 lg:py-32 bg-gray-50/50 dark:bg-background">
             <Container>
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
                     <div className="max-w-xl">
                         <motion.h2
-                            className="text-3xl lg:text-5xl font-bold text-[#1C1F34] mb-6 leading-tight"
+                            className="text-3xl lg:text-5xl font-bold text-foreground mb-6 leading-tight"
                             initial={{ opacity: 0, y: 10 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
@@ -37,7 +37,7 @@ export function Services() {
                         viewport={{ once: true }}
                         transition={{ delay: 0.2 }}
                     >
-                        <button className="hidden md:flex items-center gap-2 text-[#1C1F34] font-semibold hover:text-[#2D7CFF] transition-colors group">
+                        <button className="hidden md:flex items-center gap-2 text-foreground font-semibold hover:text-[#2D7CFF] transition-colors group">
                             View all features <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                         </button>
                     </motion.div>
@@ -47,7 +47,7 @@ export function Services() {
 
                     {/* Card 1: Supplier Discovery (Large) */}
                     <motion.div
-                        className="md:col-span-2 bg-white rounded-3xl p-8 shadow-sm border border-gray-100 hover:shadow-xl hover:border-blue-100 transition-all duration-300 relative overflow-hidden group"
+                        className="md:col-span-2 bg-white dark:bg-card/50 rounded-3xl p-8 shadow-sm border border-gray-100 dark:border-border hover:shadow-xl hover:border-blue-100 transition-all duration-300 relative overflow-hidden group"
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -57,14 +57,14 @@ export function Services() {
                                 <Globe size={24} />
                             </div>
                             <div>
-                                <h3 className="text-2xl font-bold text-[#1C1F34] mb-2 group-hover:text-[#2D7CFF] transition-colors">Global Supplier Discovery</h3>
+                                <h3 className="text-2xl font-bold text-foreground mb-2 group-hover:text-[#2D7CFF] transition-colors">Global Supplier Discovery</h3>
                                 <p className="text-gray-500 max-w-md">Instantly access a verified database of manufacturers across 50+ countries. Filter by certification, capacity, and sustainability score.</p>
                             </div>
                         </div>
 
                         {/* Abstract Map Visualization */}
-                        <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/4 w-[400px] h-[400px] opacity-10 group-hover:opacity-20 transition-opacity">
-                            <div className="absolute inset-0 bg-blue-500 rounded-full blur-[100px]" />
+                        <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/4 w-[400px] h-[400px] opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none">
+                            <div className="absolute inset-0 bg-blue-500 rounded-full blur-[100px] transform-gpu" />
                         </div>
                         {/* Fake UI Element - Supplier Search */}
                         <div className="absolute top-8 right-8 w-72 bg-white shadow-xl shadow-blue-900/5 rounded-xl border border-gray-100 p-4 hidden lg:block transform group-hover:-translate-y-2 transition-transform duration-500">
@@ -145,7 +145,7 @@ export function Services() {
 
                     {/* Card 3: RFQ Automation */}
                     <motion.div
-                        className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 hover:shadow-xl hover:border-blue-100 transition-all duration-300 group overflow-hidden"
+                        className="bg-white dark:bg-card/50 rounded-3xl p-8 shadow-sm border border-gray-100 dark:border-border hover:shadow-xl hover:border-blue-100 transition-all duration-300 group overflow-hidden"
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -156,7 +156,7 @@ export function Services() {
                                 <Send size={24} />
                             </div>
                             <div>
-                                <h3 className="text-xl font-bold text-[#1C1F34] mb-2">Automated RFQs</h3>
+                                <h3 className="text-xl font-bold text-foreground mb-2">Automated RFQs</h3>
                                 <p className="text-gray-500 text-sm mb-4">Send to 50+ suppliers in one click. Compare quotes side-by-side.</p>
 
                                 {/* Mini list for RFQ */}
@@ -176,7 +176,7 @@ export function Services() {
 
                     {/* Card 4: AI Assistant (Large Vertical or Horizontal) - Let's do horizontal col-span-2 */}
                     <motion.div
-                        className="md:col-span-2 bg-gradient-to-br from-blue-50 to-white rounded-3xl p-8 shadow-sm border border-blue-100/50 hover:shadow-xl transition-all duration-300 relative overflow-hidden group"
+                        className="md:col-span-2 bg-gradient-to-br from-blue-50 to-white dark:from-blue-900/20 dark:to-background rounded-3xl p-8 shadow-sm border border-blue-100/50 dark:border-blue-900/50 hover:shadow-xl transition-all duration-300 relative overflow-hidden group"
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -187,7 +187,7 @@ export function Services() {
                                 <div className="w-12 h-12 rounded-xl bg-[#2D7CFF] text-white flex items-center justify-center mb-6">
                                     <Bot size={24} />
                                 </div>
-                                <h3 className="text-2xl font-bold text-[#1C1F34] mb-2">AI Procurement Copilot</h3>
+                                <h3 className="text-2xl font-bold text-foreground mb-2">AI Procurement Copilot</h3>
                                 <p className="text-gray-500 text-sm leading-relaxed">
                                     Your intelligent assistant for negotiation strategies, risk handling, and supplier matching.
                                     Available 24/7.

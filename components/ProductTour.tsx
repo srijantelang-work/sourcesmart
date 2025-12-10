@@ -13,7 +13,7 @@ export function ProductTour() {
     // but for simplicity and robustness, we will stick the image column.
 
     return (
-        <section className="py-24 lg:py-32 bg-white relative overflow-hidden">
+        <section id="product-tour" className="py-24 lg:py-32 bg-background relative overflow-hidden">
             {/* Background decoration */}
             <div className="absolute top-0 right-0 w-1/3 h-full bg-blue-50/30 -skew-x-12 translate-x-32" />
 
@@ -25,10 +25,10 @@ export function ProductTour() {
                         viewport={{ once: true }}
                     >
                         <span className="text-[#2D7CFF] font-bold tracking-wider uppercase text-sm mb-4 block">Platform Capabilities</span>
-                        <h2 className="text-4xl lg:text-5xl font-bold text-[#1C1F34] mb-6 leading-tight">
+                        <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
                             Built for modern procurement teams
                         </h2>
-                        <p className="text-lg text-gray-500">
+                        <p className="text-lg text-gray-500 dark:text-gray-400">
                             SourceSmart connects every step of your purchasing lifecycle, from discovery to payment, in one intelligent interface.
                         </p>
                     </motion.div>
@@ -73,7 +73,7 @@ export function ProductTour() {
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                     >
-                        <h3 className="text-2xl font-bold text-[#1C1F34] mb-8">Ready to modernize your sourcing?</h3>
+                        <h3 className="text-2xl font-bold text-foreground mb-8">Ready to modernize your sourcing?</h3>
                         <div className="flex justify-center gap-4">
                             <Button size="lg" className="shadow-xl shadow-blue-500/20 group">
                                 View Full Feature Set <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -102,14 +102,14 @@ function FeatureBlock({ title, desc, image, benefits, index, reverse = false }: 
                     {index + 1}
                 </div>
 
-                <h3 className="text-3xl lg:text-4xl font-bold text-[#1C1F34] leading-tight">{title}</h3>
-                <p className="text-lg text-gray-500 leading-relaxed bg-white/50 backdrop-blur-sm rounded-xl">
+                <h3 className="text-3xl lg:text-4xl font-bold text-foreground leading-tight">{title}</h3>
+                <p className="text-lg text-gray-500 dark:text-gray-400 leading-relaxed bg-white/50 dark:bg-black/20 backdrop-blur-sm rounded-xl">
                     {desc}
                 </p>
 
                 <ul className="space-y-4 pt-2">
                     {benefits.map((benefit, i) => (
-                        <li key={i} className="flex items-center gap-3 text-[#1C1F34] font-medium">
+                        <li key={i} className="flex items-center gap-3 text-foreground font-medium">
                             <CheckCircle2 className="text-[#2D7CFF] w-5 h-5 flex-shrink-0" />
                             {benefit}
                         </li>
@@ -126,14 +126,14 @@ function FeatureBlock({ title, desc, image, benefits, index, reverse = false }: 
                 transition={{ duration: 0.8 }}
             >
                 <div className="relative group">
-                    <div className={`absolute -inset-4 bg-gradient-to-r from-blue-100 to-purple-50 rounded-[2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-xl -z-10`} />
-                    <div className="relative rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-gray-100/50 bg-white">
+                    <div className={`absolute -inset-4 bg-gradient-to-r from-blue-100 to-purple-50 rounded-[2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-xl -z-10 transform-gpu will-change-[opacity]`} />
+                    <div className="relative rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-gray-100/50 dark:border-gray-800/50 bg-white dark:bg-black/40">
                         <Image
                             src={image}
                             alt={title}
                             width={800}
                             height={600}
-                            className="w-full h-auto object-cover transform group-hover:scale-[1.02] transition-transform duration-700"
+                            className="w-full h-auto object-cover transform group-hover:scale-[1.02] transition-transform duration-700 will-change-transform"
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
                         />
                         {/* Glossy Overlay */}
