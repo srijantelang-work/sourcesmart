@@ -10,11 +10,12 @@ import { ArrowRight, PlayCircle } from "lucide-react";
 export function Hero() {
     return (
         <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-background">
-            {/* Aave-inspired Gradient Background - Optimized */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10 transform-gpu">
-                <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-purple-500/20 rounded-full blur-[120px] opacity-50 mix-blend-multiply dark:mix-blend-screen animate-pulse transform-gpu" style={{ animationDuration: '4s' }} />
-                <div className="absolute top-[10%] right-[-10%] w-[50%] h-[50%] bg-blue-500/20 rounded-full blur-[100px] opacity-40 mix-blend-multiply dark:mix-blend-screen transform-gpu" />
-                <div className="absolute bottom-[10%] left-[30%] w-[40%] h-[40%] bg-pink-500/20 rounded-full blur-[100px] opacity-30 mix-blend-multiply dark:mix-blend-screen transform-gpu" />
+            {/* Premium Sophisticated Background */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+                {/* Subtle Grid */}
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+                {/* Spotlight / Radial Gradient - very subtle */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-500/20 via-background to-transparent opacity-40 dark:opacity-20 blur-3xl"></div>
             </div>
 
             <Container className="relative z-10">
@@ -24,18 +25,18 @@ export function Hero() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, ease: "easeOut" }}
                     >
-                        <div className="mb-8 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary/50 backdrop-blur-sm border border-border/50 text-sm font-medium text-foreground">
+                        <div className="mb-8 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary/50 backdrop-blur-sm border border-border/50 text-sm font-medium text-foreground/80 hover:bg-secondary/80 transition-colors cursor-pointer">
                             <span className="relative flex h-2 w-2">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
                             </span>
                             v1.0 is live: AI Negotiation Copilot
                         </div>
 
-                        <h1 className="text-6xl lg:text-8xl font-bold mb-8 tracking-tight text-foreground">
+                        <h1 className="text-5xl lg:text-7xl font-bold mb-8 tracking-tight text-foreground">
                             The Operating System for
                             <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-white dark:to-zinc-400">
                                 Global Procurement.
                             </span>
                         </h1>
@@ -45,48 +46,53 @@ export function Hero() {
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                            <Button size="lg" className="h-14 px-8 text-lg rounded-full bg-foreground text-background hover:bg-foreground/90 shadow-xl">
+                            <Button size="lg" className="h-14 px-8 text-lg rounded-full bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-indigo-500/20 transition-all">
                                 Start Sourcing Free <ArrowRight className="ml-2 w-5 h-5" />
                             </Button>
-                            <Button variant="outline" size="lg" className="h-14 px-8 text-lg rounded-full border-2 border-border/50 hover:bg-secondary/50 hover:border-border transition-all">
+                            <Button variant="outline" size="lg" className="h-14 px-8 text-lg rounded-full border border-border/50 bg-background/50 backdrop-blur-sm hover:bg-secondary transition-all">
                                 <PlayCircle className="mr-2 w-5 h-5" /> Watch Demo
                             </Button>
                         </div>
                     </motion.div>
                 </div>
 
-                {/* Glassmorphic Dashboard Preview */}
+                {/* Refined Dashboard Preview */}
                 <motion.div
                     className="relative max-w-6xl mx-auto"
-                    initial={{ opacity: 0, scale: 0.95, y: 40 }}
+                    initial={{ opacity: 0, scale: 0.98, y: 40 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
                 >
-                    <div className="relative rounded-2xl glass-card p-2 sm:p-4 bg-white/5 backdrop-blur-2xl border border-white/10 dark:border-white/5 shadow-2xl">
-                        <div className="rounded-xl overflow-hidden bg-background/50 relative">
-                            <div className="absolute top-0 left-0 w-full h-8 bg-muted/50 border-b border-white/5 flex items-center px-4 gap-2 z-10">
-                                <div className="w-3 h-3 rounded-full bg-red-400/80" />
-                                <div className="w-3 h-3 rounded-full bg-yellow-400/80" />
-                                <div className="w-3 h-3 rounded-full bg-green-400/80" />
+                    <div className="relative rounded-2xl p-1 bg-gradient-to-b from-border/40 to-border/10 shadow-2xl">
+                        <div className="rounded-xl overflow-hidden bg-background relative border border-border/20 shadow-inner">
+                            {/* Browser Header Mockup */}
+                            <div className="absolute top-0 left-0 w-full h-10 bg-muted/30 border-b border-border/40 flex items-center px-4 gap-2 z-10 backdrop-blur-md">
+                                <div className="flex gap-1.5">
+                                    <div className="w-3 h-3 rounded-full bg-zinc-300 dark:bg-zinc-700" />
+                                    <div className="w-3 h-3 rounded-full bg-zinc-300 dark:bg-zinc-700" />
+                                    <div className="w-3 h-3 rounded-full bg-zinc-300 dark:bg-zinc-700" />
+                                </div>
+                                <div className="mx-auto w-[60%] h-5 bg-background/50 rounded-md border border-border/30" />
                             </div>
+
                             <Image
                                 src="/real-dashboard.png"
                                 alt="SourceSmart Dashboard"
                                 width={1400}
                                 height={900}
-                                className="w-full h-auto mt-8 block dark:opacity-90 grayscale-[10%] hover:grayscale-0 transition-all duration-700"
+                                className="w-full h-auto mt-10 block dark:opacity-90 dark:brightness-[0.9] transition-all duration-700"
                                 priority
                             />
                         </div>
                     </div>
 
-                    {/* Background Glow under image */}
-                    <div className="absolute -inset-10 top-20 bg-gradient-to-r from-blue-500/30 to-purple-600/30 blur-[80px] -z-10 opacity-60" />
+                    {/* Subtle glow behind dashboard - reduced intensity */}
+                    <div className="absolute -inset-4 top-10 bg-indigo-500/10 dark:bg-indigo-500/20 blur-[60px] -z-10 rounded-[3rem]" />
                 </motion.div>
 
                 {/* Companies Filter/Ticker */}
-                <div className="mt-32 pt-10 border-t border-border/10 relative">
-                    <p className="text-center text-muted-foreground text-sm font-medium uppercase tracking-widest mb-10 opacity-70">Trusted by modern sourcing teams</p>
+                <div className="mt-32 pt-10 border-t border-border/40 relative">
+                    <p className="text-center text-muted-foreground text-sm font-medium uppercase tracking-widest mb-10 opacity-60">Trusted by modern sourcing teams</p>
                     <div className="relative flex overflow-hidden group">
                         {/* Gradient Masks for smooth fade out */}
                         <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
@@ -99,7 +105,7 @@ export function Hero() {
                             ].map((company, i) => (
                                 <span
                                     key={i}
-                                    className="text-2xl font-bold text-muted-foreground/30 hover:text-foreground/80 transition-colors cursor-default"
+                                    className="text-xl font-bold text-muted-foreground/40 hover:text-foreground/80 transition-colors cursor-default"
                                 >
                                     {company}
                                 </span>

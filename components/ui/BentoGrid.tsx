@@ -39,7 +39,7 @@ export const BentoGridItem = ({
         <motion.div
             whileHover={{ scale: 1.01 }}
             className={cn(
-                "row-span-1 rounded-xl group/bento hover:shadow-2xl hover:shadow-blue-500/10 transition duration-300 shadow-none p-6 bg-white dark:bg-neutral-900/50 dark:border-white/10 border border-neutral-200 justify-between flex flex-col space-y-4",
+                "row-span-1 rounded-xl group/bento hover:shadow-2xl hover:shadow-indigo-500/10 transition duration-300 shadow-none p-6 bg-white dark:bg-zinc-900/50 dark:border-white/10 border border-neutral-200 justify-between flex flex-col space-y-4",
                 "backdrop-blur-sm",
                 className
             )}

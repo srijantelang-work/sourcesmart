@@ -21,9 +21,9 @@ import { Bot, Database, FileText, Globe, ShoppingCart, Zap } from 'lucide-react'
 const CustomNode = ({ data }: { data: { label: string; icon: any; sub: string; handles?: { source?: boolean; target?: boolean } } }) => {
     const Icon = data.icon;
     return (
-        <div className="px-4 py-3 shadow-xl rounded-xl bg-white dark:bg-black/90 border border-gray-100 dark:border-white/10 w-[200px]">
+        <div className="px-4 py-3 shadow-sm rounded-xl bg-white dark:bg-zinc-900 border border-border/50 w-[200px] transition-shadow hover:shadow-md">
             <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
+                <div className="p-2 rounded-lg bg-secondary text-primary">
                     <Icon size={16} />
                 </div>
                 <div>
@@ -34,10 +34,10 @@ const CustomNode = ({ data }: { data: { label: string; icon: any; sub: string; h
 
             {/* Conditionally Render Handles */}
             {data.handles?.target && (
-                <Handle type="target" position={Position.Left} className="!bg-blue-500 !w-2 !h-2" />
+                <Handle type="target" position={Position.Left} className="!bg-primary !w-2 !h-2 !border-background" />
             )}
             {data.handles?.source && (
-                <Handle type="source" position={Position.Right} className="!bg-blue-500 !w-2 !h-2" />
+                <Handle type="source" position={Position.Right} className="!bg-primary !w-2 !h-2 !border-background" />
             )}
         </div>
     );
@@ -81,10 +81,10 @@ const initialNodes = [
 ];
 
 const initialEdges = [
-    { id: 'e1-3', source: '1', target: '3', animated: true, style: { stroke: '#3b82f6' } },
-    { id: 'e2-3', source: '2', target: '3', animated: true, style: { stroke: '#3b82f6' } },
-    { id: 'e3-4', source: '3', target: '4', animated: true, style: { stroke: '#3b82f6' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#3b82f6' } },
-    { id: 'e3-5', source: '3', target: '5', animated: true, style: { stroke: '#3b82f6' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#3b82f6' } },
+    { id: 'e1-3', source: '1', target: '3', animated: true, style: { stroke: '#6366f1' } }, // Indigo 500
+    { id: 'e2-3', source: '2', target: '3', animated: true, style: { stroke: '#6366f1' } },
+    { id: 'e3-4', source: '3', target: '4', animated: true, style: { stroke: '#6366f1' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#6366f1' } },
+    { id: 'e3-5', source: '3', target: '5', animated: true, style: { stroke: '#6366f1' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#6366f1' } },
 ];
 
 export function WorkflowSection() {
@@ -92,8 +92,11 @@ export function WorkflowSection() {
     const [edges, , onEdgesChange] = useEdgesState(initialEdges);
 
     return (
-        <section id="workflow" className="py-24 bg-secondary/20 relative overflow-hidden">
-            <Container>
+        <section id="workflow" className="py-24 relative overflow-hidden bg-background">
+            {/* Background Grid - Seamless with Hero */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+
+            <Container className="relative z-10">
                 <div className="text-center max-w-3xl mx-auto mb-16">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -109,7 +112,7 @@ export function WorkflowSection() {
                     </motion.div>
                 </div>
 
-                <div className="h-[400px] w-full bg-background rounded-2xl border border-border/50 shadow-sm overflow-hidden relative">
+                <div className="h-[400px] w-full bg-secondary/30 dark:bg-white/5 rounded-2xl border border-border/50 overflow-hidden relative backdrop-blur-sm">
                     <ReactFlow
                         nodes={nodes}
                         edges={edges}

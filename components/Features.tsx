@@ -7,18 +7,19 @@ import { motion } from "framer-motion";
 
 export function Features() {
     return (
-        <section id="features" className="py-20 lg:py-32 bg-secondary dark:bg-black relative overflow-hidden">
-            <div className="absolute inset-0 dark:bg-grid-white/[0.02] bg-grid-black/[0.02] -z-[1]" />
+        <section id="features" className="py-20 lg:py-32 bg-secondary/30 dark:bg-background relative overflow-hidden">
+            {/* Seamless Grid Background matches Hero/Workflow */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] -z-10"></div>
 
-            <div className="max-w-4xl mx-auto text-center mb-16 px-4">
+            <div className="max-w-4xl mx-auto text-center mb-16 px-4 relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
                 >
-                    <h2 className="text-3xl md:text-5xl font-bold dark:text-white text-navy mb-6">
-                        Everything you need to <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">source smarter.</span>
+                    <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
+                        Everything you need to <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500 dark:from-indigo-400 dark:to-purple-400">source smarter.</span>
                     </h2>
                     <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                         Replace disjointed tools with a single, intelligent operating system designed for modern procurement teams.
@@ -26,7 +27,7 @@ export function Features() {
                 </motion.div>
             </div>
 
-            <BentoGrid className="max-w-6xl mx-auto px-4">
+            <BentoGrid className="max-w-7xl mx-auto px-4 relative z-10">
                 {items.map((item, i) => (
                     <BentoGridItem
                         key={i}
@@ -78,14 +79,14 @@ function SkeletonOne() {
     ];
 
     return (
-        <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-900 dark:to-neutral-800 p-4 relative overflow-hidden group">
+        <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-100 to-white dark:from-zinc-900 dark:to-zinc-950 border border-border/50 p-4 relative overflow-hidden group">
             <div className="absolute inset-x-0 bottom-0 top-1/3 bg-gradient-to-t from-white via-white/80 to-transparent dark:from-black dark:via-black/80 z-10" />
 
             <div className="flex flex-col gap-3 w-full">
                 {suppliers.map((supplier, i) => (
-                    <div key={i} className="flex items-center justify-between bg-white dark:bg-neutral-800/50 p-3 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-700/50">
+                    <div key={i} className="flex items-center justify-between bg-white dark:bg-zinc-800/40 p-3 rounded-lg shadow-sm border border-neutral-200 dark:border-white/5">
                         <div className="flex items-center gap-3">
-                            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ${i === 0 ? 'bg-blue-100 text-blue-600' : 'bg-neutral-100 text-neutral-500'}`}>
+                            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ${i === 0 ? 'bg-indigo-100 text-indigo-600 dark:bg-indigo-900/50 dark:text-indigo-300' : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-500'}`}>
                                 {supplier.name.substring(0, 2).toUpperCase()}
                             </div>
                             <div>
@@ -94,14 +95,14 @@ function SkeletonOne() {
                             </div>
                         </div>
                         {supplier.verified && (
-                            <span className="text-[10px] px-2 py-0.5 rounded-full bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 font-medium">Verified</span>
+                            <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400 font-medium">Verified</span>
                         )}
                     </div>
                 ))}
             </div>
 
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20">
-                <div className="bg-blue-600 text-white px-4 py-2 rounded-full text-xs font-bold shadow-lg hover:scale-105 transition-transform flex items-center gap-2">
+                <div className="bg-primary text-primary-foreground px-4 py-2 rounded-full text-xs font-bold shadow-lg hover:scale-105 transition-transform flex items-center gap-2">
                     <Globe className="w-3 h-3" /> View 50+ Matches
                 </div>
             </div>
@@ -111,7 +112,7 @@ function SkeletonOne() {
 
 function SkeletonTwo() {
     return (
-        <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-900 dark:to-neutral-800 relative group overflow-hidden flex flex-col justify-between p-4">
+        <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-100 to-white dark:from-zinc-900 dark:to-zinc-950 border border-border/50 relative group overflow-hidden flex flex-col justify-between p-4">
 
             {/* Header/Stats */}
             <div className="flex justify-between items-start z-10">
@@ -120,7 +121,7 @@ function SkeletonTwo() {
                     <span className="text-xl font-bold text-neutral-800 dark:text-neutral-200 mt-1">$4,230.50</span>
                 </div>
                 <div className="flex flex-col items-end gap-1">
-                    <div className="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-[10px] px-1.5 py-0.5 rounded font-bold flex items-center gap-1">
+                    <div className="bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-[10px] px-1.5 py-0.5 rounded font-bold flex items-center gap-1">
                         <TrendingUp className="w-3 h-3" /> +12.5%
                     </div>
                 </div>
@@ -136,7 +137,7 @@ function SkeletonTwo() {
                 </div>
 
                 {/* Main Graph Line (Copper) */}
-                <svg viewBox="0 0 100 40" preserveAspectRatio="none" className="absolute inset-0 w-full h-full text-blue-500 stroke-current stroke-[3] fill-none z-10">
+                <svg viewBox="0 0 100 40" preserveAspectRatio="none" className="absolute inset-0 w-full h-full text-indigo-500 stroke-current stroke-[3] fill-none z-10">
                     <defs>
                         <linearGradient id="gradientblue" x1="0" y1="0" x2="0" y2="1">
                             <stop offset="0%" stopColor="currentColor" stopOpacity="0.2" />
@@ -144,7 +145,7 @@ function SkeletonTwo() {
                         </linearGradient>
                     </defs>
                     <path d="M0 30 C 20 25, 40 10, 50 15 S 80 5, 100 2" />
-                    <path d="M0 30 C 20 25, 40 10, 50 15 S 80 5, 100 2 V 40 H 0 Z" className="fill-blue-500/10 stroke-none" />
+                    <path d="M0 30 C 20 25, 40 10, 50 15 S 80 5, 100 2 V 40 H 0 Z" className="fill-indigo-500/10 stroke-none" />
                 </svg>
 
                 {/* Secondary Graph Line (Steel) */}
@@ -153,13 +154,13 @@ function SkeletonTwo() {
                 </svg>
 
                 {/* Tooltip Dot Mockup */}
-                <div className="absolute top-[5%] right-0 w-3 h-3 bg-blue-500 rounded-full border-2 border-white dark:border-neutral-800 shadow-sm z-20"></div>
+                <div className="absolute top-[5%] right-0 w-3 h-3 bg-indigo-500 rounded-full border-2 border-white dark:border-neutral-800 shadow-sm z-20"></div>
             </div>
 
             {/* Legend */}
             <div className="flex gap-4 mt-2">
                 <div className="flex items-center gap-1.5">
-                    <div className="w-2 h-2 rounded-full bg-blue-500"></div>
+                    <div className="w-2 h-2 rounded-full bg-indigo-500"></div>
                     <span className="text-[10px] text-neutral-500">Copper</span>
                 </div>
                 <div className="flex items-center gap-1.5">
@@ -179,15 +180,15 @@ function SkeletonThree() {
     ];
 
     return (
-        <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-900 dark:to-neutral-800 p-4 flex-col gap-3">
+        <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-100 to-white dark:from-zinc-900 dark:to-zinc-950 border border-border/50 p-4 flex-col gap-3">
             {rfqs.map((rfq, i) => (
-                <div key={i} className={`flex items-center justify-between p-3 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-700/50 bg-white dark:bg-neutral-800 w-full transform transition-all duration-300 hover:scale-[1.02] ${i === 0 ? 'border-l-4 border-l-blue-500' : ''}`}>
+                <div key={i} className={`flex items-center justify-between p-3 rounded-lg shadow-sm border border-neutral-200 dark:border-white/5 bg-white dark:bg-zinc-800/40 w-full transform transition-all duration-300 hover:scale-[1.02] ${i === 0 ? 'border-l-4 border-l-indigo-500' : ''}`}>
                     <div>
                         <div className="text-[10px] text-neutral-400 font-mono mb-0.5">{rfq.id}</div>
                         <div className="text-xs font-bold text-neutral-800 dark:text-neutral-200">{rfq.title}</div>
                     </div>
-                    <div className={`text-[10px] font-bold px-2 py-1 rounded ${rfq.status.includes("Received") ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300" :
-                        rfq.status === "Sent" ? "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300" :
+                    <div className={`text-[10px] font-bold px-2 py-1 rounded ${rfq.status.includes("Received") ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300" :
+                        rfq.status === "Sent" ? "bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300" :
                             "bg-gray-100 text-gray-500"
                         }`}>
                         {rfq.status}
@@ -195,7 +196,7 @@ function SkeletonThree() {
                 </div>
             ))}
             <div className="mt-auto flex justify-center">
-                <button className="text-[10px] font-bold text-neutral-500 flex items-center gap-1 hover:text-blue-600 transition-colors">
+                <button className="text-[10px] font-bold text-neutral-500 flex items-center gap-1 hover:text-indigo-600 transition-colors">
                     View All <Send className="w-2 h-2" />
                 </button>
             </div>
@@ -222,7 +223,7 @@ function SkeletonFour() {
     ];
 
     return (
-        <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-900 dark:to-neutral-800 p-4 relative overflow-hidden flex-col justify-end">
+        <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-100 to-white dark:from-zinc-900 dark:to-zinc-950 border border-border/50 p-4 relative overflow-hidden flex-col justify-end">
             <div className="absolute top-0 right-0 p-4 opacity-[0.03]">
                 <Bot className="h-32 w-32 text-neutral-900 dark:text-white" />
             </div>
@@ -238,8 +239,8 @@ function SkeletonFour() {
                             display: step >= i + 1 ? 'block' : 'none'
                         }}
                         className={`p-2.5 rounded-2xl text-xs max-w-[85%] shadow-sm ${msg.role === 'user'
-                            ? "bg-blue-600 text-white self-end rounded-br-none"
-                            : "bg-white dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 border border-neutral-200 dark:border-neutral-700/50 self-start rounded-bl-none font-medium"
+                            ? "bg-primary text-primary-foreground self-end rounded-br-none"
+                            : "bg-white dark:bg-zinc-800 text-neutral-800 dark:text-neutral-200 border border-neutral-200 dark:border-white/10 self-start rounded-bl-none font-medium"
                             }`}
                     >
                         {msg.text}
@@ -249,7 +250,7 @@ function SkeletonFour() {
                 {/* Thinking Indicator */}
                 <motion.div
                     animate={{ opacity: step === 1 || step === 5 ? 1 : 0 }}
-                    className="self-start bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700/50 p-2 rounded-2xl rounded-bl-none flex gap-1 shadow-sm"
+                    className="self-start bg-white dark:bg-zinc-800 border border-neutral-200 dark:border-white/10 p-2 rounded-2xl rounded-bl-none flex gap-1 shadow-sm"
                 >
                     <span className="w-1 h-1 bg-neutral-400 rounded-full animate-bounce" />
                     <span className="w-1 h-1 bg-neutral-400 rounded-full animate-bounce delay-100" />
