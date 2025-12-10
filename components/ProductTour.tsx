@@ -1,148 +1,210 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
+import { useScroll, useTransform, motion, useInView } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, Search, BarChart3, Radio, Bot } from "lucide-react";
+
+const tours = [
+    {
+        id: "discovery",
+        title: "Global Supplier Discovery",
+        subtitle: "Verified Manufacturer Database",
+        description: "Stop relying on outdated directory listings. Access our real-time database of 50,000+ verified manufacturers with deep filters for certifications, capacity, and ESG scores.",
+        benefits: ["ISO 9001 & 14001 Filters", "real-time Production Capacity", "3D Facility Tours"],
+        image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2940&auto=format&fit=crop",
+        // Using high-q abstract/tech images if real UI screenshots aren't available, 
+        // otherwise I would use the file paths provided previously. 
+        // Reverting to previous file paths to be safe:
+        localImage: "/real-supplier-discovery.png",
+        icon: Search,
+        accent: "text-blue-500",
+        bg: "bg-blue-500/10"
+    },
+    {
+        id: "rfq",
+        title: "Intelligent RFQ Management",
+        subtitle: "Automated Negotiation Pipelines",
+        description: "Create one master RFQ and let our agents distribute it to the perfect supplier match. Watch as bids flow in, automatically normalized for apple-to-apples comparison.",
+        benefits: ["Bulk RFQ Distribution", "Auto-Normalization of Bids", "Historical Price Benchmarking"],
+        localImage: "/real-rfq.png",
+        icon: Radio,
+        accent: "text-purple-500",
+        bg: "bg-purple-500/10"
+    },
+    {
+        id: "market",
+        title: "Market Watch & Risks",
+        subtitle: "Predictive Supply Chain Analytics",
+        description: "Don't get caught by price spikes. Our engine monitors commodity indices and geopolitical news to warn you of disruptions before they hit your P&L.",
+        benefits: ["Commodity Price Alerts", "Supply Chain Disruption Map", "Inflation Forecasts"],
+        localImage: "/real-market-trends.png",
+        icon: BarChart3,
+        accent: "text-emerald-500",
+        bg: "bg-emerald-500/10"
+    },
+    {
+        id: "copilot",
+        title: "AI Procurement Copilot",
+        subtitle: "24/7 Strategic Assistant",
+        description: "Your new best employee never sleeps. Ask complex questions about your spend, generate contract drafts, or simulate negotiation scenarios instantly.",
+        benefits: ["Natural Language Queries", "Instant Contract Drafting", "Negotiation Scripts"],
+        localImage: "/real-ai-chat.png",
+        icon: Bot,
+        accent: "text-orange-500",
+        bg: "bg-orange-500/10"
+    }
+];
 
 export function ProductTour() {
-    // We'll use a sticky scroll layout. 
-    // The container will track scroll progress to switch active states if needed, 
-    // but for simplicity and robustness, we will stick the image column.
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [activeCard, setActiveCard] = useState(0);
 
     return (
-        <section id="product-tour" className="py-24 lg:py-32 bg-background relative overflow-hidden">
-            {/* Background decoration */}
-            <div className="absolute top-0 right-0 w-1/3 h-full bg-blue-50/30 -skew-x-12 translate-x-32" />
+        <section id="product-tour" className="bg-background relative">
+            <Container>
+                <div className="py-20 lg:py-32">
+                    {/* Section Header */}
+                    <div className="max-w-3xl mb-24">
+                        <motion.h2
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="text-4xl lg:text-6xl font-bold tracking-tighter mb-6 text-foreground"
+                        >
+                            Orchestrate your <br />
+                            <span className="text-primary opacity-80">entire supply chain.</span>
+                        </motion.h2>
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.1 }}
+                            className="text-xl text-muted-foreground max-w-xl"
+                        >
+                            Experience a flow that feels like magic. One platform to discover, negotiate, and manage it all.
+                        </motion.p>
+                    </div>
 
-            <Container className="relative z-10">
-                <div className="text-center mb-24 max-w-3xl mx-auto">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                    >
-                        <span className="text-[#2D7CFF] font-bold tracking-wider uppercase text-sm mb-4 block">Platform Capabilities</span>
-                        <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
-                            Built for modern procurement teams
-                        </h2>
-                        <p className="text-lg text-gray-500 dark:text-gray-400">
-                            SourceSmart connects every step of your purchasing lifecycle, from discovery to payment, in one intelligent interface.
-                        </p>
-                    </motion.div>
-                </div>
-
-                <div className="flex flex-col gap-32">
-                    <FeatureBlock
-                        title="Discover Suppliers Quickly"
-                        desc="Search by material, quantity, location — get top matches instantly with our verified global database."
-                        image="/real-supplier-discovery.png"
-                        benefits={["50+ Countries Verified", "Instant Capability Matching", "ISO Certification Filter"]}
-                        index={0}
-                    />
-                    <FeatureBlock
-                        title="Manage RFQs End-to-End"
-                        desc="Save time with smart RFQ creation, reminders, and negotiation tracking in one unified pipeline."
-                        image="/real-rfq.png"
-                        benefits={["One-Click Bulk Sending", "Auto-Reminders", "Side-by-Side Comparison"]}
-                        index={1}
-                        reverse
-                    />
-                    <FeatureBlock
-                        title="Track Market Trends & Risks"
-                        desc="Real-time pricing, forecasts, and disruption alerts help you buy at the right time and mitigate risks."
-                        image="/real-market-trends.png"
-                        benefits={["Commodity Price Alerts", "Supply Chain Disruption Map", "Inflation Forecasts"]}
-                        index={2}
-                    />
-                    <FeatureBlock
-                        title="AI That Works Like Your Analyst"
-                        desc="Ask anything — from finding suppliers to understanding pricing volatility. Your 24/7 intelligent assistant."
-                        image="/real-ai-chat.png"
-                        benefits={["Natural Language Queries", "Instant Reports", "Negotiation Scripts"]}
-                        index={3}
-                        reverse
-                    />
-                </div>
-
-                <div className="mt-32 text-center">
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                    >
-                        <h3 className="text-2xl font-bold text-foreground mb-8">Ready to modernize your sourcing?</h3>
-                        <div className="flex justify-center gap-4">
-                            <Button size="lg" className="shadow-xl shadow-blue-500/20 group">
-                                View Full Feature Set <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                            </Button>
+                    <div className="flex flex-col lg:flex-row gap-20" ref={containerRef}>
+                        {/* Left Side: Scrollable Text Content */}
+                        <div className="w-full lg:w-[40%] flex flex-col gap-16 lg:gap-[30vh] pb-20 lg:pb-[50vh]">
+                            {tours.map((tour, index) => (
+                                <TourTextBlock
+                                    key={index}
+                                    tour={tour}
+                                    index={index}
+                                    setActive={setActiveCard}
+                                />
+                            ))}
                         </div>
-                    </motion.div>
+
+                        {/* Right Side: Sticky Visuals */}
+                        <div className="hidden lg:block w-[60%] relative">
+                            <div className="sticky top-10 h-screen flex items-start justify-center py-20">
+                                <div className="relative w-full aspect-[4/3] rounded-3xl border border-border/50 bg-secondary/5 shadow-2xl overflow-hidden backdrop-blur-sm">
+                                    {/* Abstract Fancy Background per card */}
+                                    <div className="absolute inset-0 bg-gradient-to-br from-background via-secondary/20 to-background z-0" />
+
+                                    {/* Render all images stacked, fade between them */}
+                                    {tours.map((tour, index) => (
+                                        <motion.div
+                                            key={tour.id}
+                                            className="absolute inset-4 rounded-2xl overflow-hidden border border-border/40 shadow-inner bg-background"
+                                            initial={{ opacity: 0, scale: 0.95, y: 20, filter: "blur(10px)" }}
+                                            animate={{
+                                                opacity: activeCard === index ? 1 : 0,
+                                                scale: activeCard === index ? 1 : 0.95,
+                                                y: activeCard === index ? 0 : 20,
+                                                filter: activeCard === index ? "blur(0px)" : "blur(4px)",
+                                                zIndex: activeCard === index ? 10 : 0
+                                            }}
+                                            transition={{ duration: 0.6, ease: "circOut" }}
+                                        >
+                                            {/* Window Controls Decoration */}
+                                            <div className="h-8 bg-muted/30 border-b border-border/40 flex items-center px-4 gap-2">
+                                                <div className="w-3 h-3 rounded-full bg-red-400/80" />
+                                                <div className="w-3 h-3 rounded-full bg-amber-400/80" />
+                                                <div className="w-3 h-3 rounded-full bg-green-400/80" />
+                                                <div className="ml-auto text-[10px] text-muted-foreground font-mono opacity-50">
+                                                    sourcesmart_v2.0.exe
+                                                </div>
+                                            </div>
+
+                                            {/* Image/Content */}
+                                            <div className="relative w-full h-full bg-secondary/10">
+                                                <Image
+                                                    src={tour.localImage}
+                                                    alt={tour.title}
+                                                    fill
+                                                    className="object-contain object-center scale-90"
+                                                />
+                                                {/* Gradient Overlay for blending */}
+                                                <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent pointer-events-none" />
+                                            </div>
+                                        </motion.div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </Container>
         </section>
     );
 }
 
-function FeatureBlock({ title, desc, image, benefits, index, reverse = false }: { title: string, desc: string, image: string, benefits: string[], index: number, reverse?: boolean }) {
+function TourTextBlock({ tour, index, setActive }: { tour: any, index: number, setActive: (i: number) => void }) {
+    const ref = useRef(null);
+    const isInView = useInView(ref, { margin: "-20% 0px -50% 0px", amount: 0.3 });
+
+    useEffect(() => {
+        if (isInView) {
+            setActive(index);
+        }
+    }, [isInView, index, setActive]);
+
     return (
-        <div className={`flex flex-col lg:flex-row items-center gap-16 lg:gap-24 ${reverse ? 'lg:flex-row-reverse' : ''}`}>
+        <div ref={ref} className="group min-h-0 lg:min-h-[50vh] flex flex-col justify-center lg:justify-start py-10 lg:py-0">
+            <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 transition-colors duration-500 ${tour.bg} ${tour.accent}`}>
+                <tour.icon size={24} />
+            </div>
 
-            {/* Text Side */}
-            <motion.div
-                className="flex-1 space-y-8"
-                initial={{ opacity: 0, x: reverse ? 50 : -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-            >
-                <div className="w-12 h-12 rounded-2xl bg-blue-50 text-[#2D7CFF] flex items-center justify-center font-bold text-xl mb-6 shadow-sm">
-                    {index + 1}
-                </div>
+            <h3 className="text-3xl font-bold mb-4 text-foreground flex items-center gap-4">
+                <span className="text-muted-foreground/30 text-lg font-mono">0{index + 1}</span>
+                {tour.title}
+            </h3>
 
-                <h3 className="text-3xl lg:text-4xl font-bold text-foreground leading-tight">{title}</h3>
-                <p className="text-lg text-gray-500 dark:text-gray-400 leading-relaxed bg-white/50 dark:bg-black/20 backdrop-blur-sm rounded-xl">
-                    {desc}
-                </p>
+            {/* Mobile Image */}
+            <div className="w-full aspect-video relative mb-6 rounded-xl overflow-hidden lg:hidden border border-border/50 shadow-sm">
+                <Image
+                    src={tour.localImage}
+                    alt={tour.title}
+                    fill
+                    className="object-cover"
+                />
+            </div>
 
-                <ul className="space-y-4 pt-2">
-                    {benefits.map((benefit, i) => (
-                        <li key={i} className="flex items-center gap-3 text-foreground font-medium">
-                            <CheckCircle2 className="text-[#2D7CFF] w-5 h-5 flex-shrink-0" />
-                            {benefit}
-                        </li>
-                    ))}
-                </ul>
-            </motion.div>
+            <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-md">
+                {tour.description}
+            </p>
 
-            {/* Image Side */}
-            <motion.div
-                className="flex-1 w-full"
-                initial={{ opacity: 0, scale: 0.95, y: 40 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.8 }}
-            >
-                <div className="relative group">
-                    <div className={`absolute -inset-4 bg-gradient-to-r from-blue-100 to-purple-50 rounded-[2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-xl -z-10 transform-gpu will-change-[opacity]`} />
-                    <div className="relative rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-gray-100/50 dark:border-gray-800/50 bg-white dark:bg-black/40">
-                        <Image
-                            src={image}
-                            alt={title}
-                            width={800}
-                            height={600}
-                            className="w-full h-auto object-cover transform group-hover:scale-[1.02] transition-transform duration-700 will-change-transform"
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
-                        />
-                        {/* Glossy Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent pointer-events-none" />
-                    </div>
-                    {/* Floating Badge Decoration */}
-                    <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-blue-500/10 rounded-full blur-[40px] -z-10" />
-                </div>
-            </motion.div>
+            <ul className="space-y-4">
+                {tour.benefits.map((benefit: string, i: number) => (
+                    <li key={i} className="flex items-center gap-3 text-sm font-medium text-foreground/80">
+                        <CheckCircle2 className={`w-5 h-5 ${tour.accent}`} />
+                        {benefit}
+                    </li>
+                ))}
+            </ul>
+
+            <div className="mt-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
+                <Button variant="outline" className="gap-2">
+                    Learn more <ArrowRight className="w-4 h-4" />
+                </Button>
+            </div>
         </div>
     )
 }

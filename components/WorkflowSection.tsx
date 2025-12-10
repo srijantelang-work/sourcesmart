@@ -112,7 +112,8 @@ export function WorkflowSection() {
                     </motion.div>
                 </div>
 
-                <div className="h-[400px] w-full bg-secondary/30 dark:bg-white/5 rounded-2xl border border-border/50 overflow-hidden relative backdrop-blur-sm">
+                {/* Desktop Diagram */}
+                <div className="hidden md:block h-[400px] w-full bg-secondary/30 dark:bg-white/5 rounded-2xl border border-border/50 overflow-hidden relative backdrop-blur-sm">
                     <ReactFlow
                         nodes={nodes}
                         edges={edges}
@@ -131,11 +132,30 @@ export function WorkflowSection() {
                         nodesDraggable={false}
                         preventScrolling={false}
                     >
-                        {/* Optional Background Grid if needed, but keeping it clean for now */}
                     </ReactFlow>
 
-                    {/* Overlay to prevent interaction if desired, or keep it interactive */}
                     <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_40px_rgba(0,0,0,0.05)] dark:shadow-[inset_0_0_40px_rgba(0,0,0,0.5)] rounded-2xl" />
+                </div>
+
+                {/* Mobile Vertical List */}
+                <div className="md:hidden flex flex-col gap-6 relative">
+                    {/* Connecting Line */}
+                    <div className="absolute left-[28px] top-6 bottom-6 w-0.5 bg-border border-l border-dashed border-primary/30" />
+
+                    {[...initialNodes].sort((a, b) => a.position.x - b.position.x).map((node, i) => {
+                        const Icon = node.data.icon;
+                        return (
+                            <div key={node.id} className="relative z-10 flex items-center gap-4">
+                                <div className="w-14 h-14 rounded-2xl bg-secondary/50 border border-border flex items-center justify-center shrink-0">
+                                    <Icon size={24} className="text-primary" />
+                                </div>
+                                <div className="bg-card/50 p-4 rounded-xl border border-border/50 flex-1 backdrop-blur-sm">
+                                    <div className="font-bold text-foreground">{node.data.label}</div>
+                                    <div className="text-sm text-muted-foreground">{node.data.sub}</div>
+                                </div>
+                            </div>
+                        )
+                    })}
                 </div>
             </Container>
         </section>

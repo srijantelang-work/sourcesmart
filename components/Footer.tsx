@@ -68,7 +68,6 @@ export function Footer() {
                         <h4 className="text-foreground dark:text-white font-bold mb-6 text-lg">Product</h4>
                         <ul className="space-y-4 text-base">
                             <FooterLink href="#features">Features</FooterLink>
-                            <FooterLink href="#">Pricing</FooterLink>
                             <FooterLink href="#">Documentation</FooterLink>
                             <FooterLink href="#services">Services</FooterLink>
                         </ul>
@@ -78,8 +77,6 @@ export function Footer() {
                         <h4 className="text-foreground dark:text-white font-bold mb-6 text-lg">Company</h4>
                         <ul className="space-y-4 text-base">
                             <FooterLink href="#about">About Us</FooterLink>
-                            <FooterLink href="#">Careers</FooterLink>
-                            <FooterLink href="#">Blog</FooterLink>
                             <FooterLink href="#contact">Contact</FooterLink>
                         </ul>
                     </div>

@@ -1,6 +1,6 @@
 .switch {
-    --transition: 300ms;
-    --transition500: 500ms;
+    --transition: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition500: 500ms cubic-bezier(0.4, 0, 0.2, 1);
     --color-dark: #0c0f14;
     --color-darkGray: #21262e;
     --color-gray: #52555a;
@@ -11,11 +11,10 @@
     align-items: center;
     width: 60px;
     height: 32px;
-    /* Fixed height for consistency */
     background-color: var(--color-dark);
     border-radius: 30px;
     padding: 4px;
-    transition: var(--transition500);
+    transition: background-color var(--transition500);
     user-select: none;
     cursor: pointer;
     overflow: hidden;
@@ -23,7 +22,7 @@
 
 /* Svg styles */
 .switch .svg {
-    transition: var(--transition);
+    transition: transform var(--transition), opacity var(--transition);
     position: absolute;
     left: 5px;
 }
@@ -32,10 +31,11 @@
     width: 18px;
     fill: var(--color-gray);
     opacity: 1;
+    transform: rotate(0deg) scale(1);
 }
 
 .switch .sun {
-    transform: translateY(-50%);
+    transform: translateY(-50%) rotate(-90deg) scale(0.5);
     width: 12px;
     height: 12px;
     border-radius: 50%;
@@ -90,14 +90,13 @@
     left: 0;
     background-color: var(--color-darkGray);
     border: 1px solid var(--color-darkGray);
-    transition: var(--transition500);
+    transition: left var(--transition500), background-color var(--transition500), border-color var(--transition500), box-shadow var(--transition500);
     box-shadow: 1px 1px 20px 3px var(--color-darkGray);
     cursor: pointer;
     margin: 0;
-    /* Reset margins */
 }
 
-/* .switch:has(.circle:checked) */
+/* Light Mode State */
 .switch:has(.circle:checked) {
     background: var(--color-offwhite);
 }
@@ -119,8 +118,10 @@
 
 .switch:has(.circle:checked) .sun {
     opacity: 1;
+    transform: translateY(-50%) rotate(0deg) scale(1);
 }
 
 .switch:has(.circle:checked) .moon {
     opacity: 0;
+    transform: rotate(90deg) scale(0.5);
 }

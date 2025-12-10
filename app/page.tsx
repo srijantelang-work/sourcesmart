@@ -4,7 +4,7 @@ import { WhyChoose } from "@/components/WhyChoose";
 import { Features } from "@/components/Features";
 import { WorkflowSection } from "@/components/WorkflowSection";
 import { ProductTour } from "@/components/ProductTour";
-import { Pricing } from "@/components/Pricing";
+
 import { Testimonials } from "@/components/Testimonials";
 import { About } from "@/components/About";
 import { Contact } from "@/components/Contact";
@@ -19,7 +19,7 @@ export default function Home() {
       <Features />
       <WorkflowSection />
       <ProductTour />
-      <Pricing />
+
       <About />
       <Testimonials />
       <Contact />
