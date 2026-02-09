@@ -178,10 +178,10 @@ function TourTextBlock({ tour, index, setActive }: { tour: any, index: number, s
                         alt={tour.title}
                         width={24}
                         height={24}
-                        className="object-contain"
+                        className="object-contain dark:invert"
                     />
                 ) : (
-                    <tour.icon size={24} className={tour.accent} />
+                    <tour.icon size={24} className="text-black dark:text-white" />
                 )}
             </div>
 
