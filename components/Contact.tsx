@@ -1,12 +1,50 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { motion } from "framer-motion";
-import { Mail, Phone, CheckCircle2, ArrowRight } from "lucide-react";
+import { Mail, Phone, CheckCircle2, ArrowRight, Check } from "lucide-react";
 
 export function Contact() {
+    const [formData, setFormData] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        company: "",
+        materialFocus: ""
+    });
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+
+        // Simulate form submission
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
+        setIsSubmitting(false);
+        setIsSubmitted(true);
+
+        // Reset form after 3 seconds
+        setTimeout(() => {
+            setIsSubmitted(false);
+            setFormData({
+                firstName: "",
+                lastName: "",
+                email: "",
+                company: "",
+                materialFocus: ""
+            });
+        }, 3000);
+    };
+
     return (
         <section id="contact" className="py-24 lg:py-32 bg-[#0F1629] relative overflow-hidden">
             {/* Background Effects */}
@@ -63,52 +101,109 @@ export function Contact() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <h3 className="text-2xl font-bold text-[#1C1F34] mb-6">Schedule a Demo</h3>
-                        <form className="space-y-5">
-                            <div className="grid grid-cols-2 gap-5">
-                                <div className="space-y-2">
-                                    <label className="text-sm font-semibold text-[#1C1F34]">First Name</label>
-                                    <input type="text" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#2D7CFF] focus:ring-2 focus:ring-blue-100 outline-none transition-all bg-gray-50 focus:bg-white" placeholder="Jane" />
+                        {isSubmitted ? (
+                            <div className="flex flex-col items-center justify-center py-12 text-center">
+                                <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-6">
+                                    <Check className="w-8 h-8 text-green-600" />
                                 </div>
-                                <div className="space-y-2">
-                                    <label className="text-sm font-semibold text-[#1C1F34]">Last Name</label>
-                                    <input type="text" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#2D7CFF] focus:ring-2 focus:ring-blue-100 outline-none transition-all bg-gray-50 focus:bg-white" placeholder="Doe" />
-                                </div>
+                                <h3 className="text-2xl font-bold text-[#1C1F34] mb-2">Thank you!</h3>
+                                <p className="text-gray-600">We'll be in touch shortly to schedule your demo.</p>
                             </div>
+                        ) : (
+                            <>
+                                <h3 className="text-2xl font-bold text-[#1C1F34] mb-6">Schedule a Demo</h3>
+                                <form className="space-y-5" onSubmit={handleSubmit}>
+                                    <div className="grid grid-cols-2 gap-5">
+                                        <div className="space-y-2">
+                                            <label className="text-sm font-semibold text-[#1C1F34]">First Name</label>
+                                            <input
+                                                type="text"
+                                                name="firstName"
+                                                value={formData.firstName}
+                                                onChange={handleInputChange}
+                                                required
+                                                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#2D7CFF] focus:ring-2 focus:ring-blue-100 outline-none transition-all bg-gray-50 focus:bg-white"
+                                                placeholder="Jane"
+                                            />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <label className="text-sm font-semibold text-[#1C1F34]">Last Name</label>
+                                            <input
+                                                type="text"
+                                                name="lastName"
+                                                value={formData.lastName}
+                                                onChange={handleInputChange}
+                                                required
+                                                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#2D7CFF] focus:ring-2 focus:ring-blue-100 outline-none transition-all bg-gray-50 focus:bg-white"
+                                                placeholder="Doe"
+                                            />
+                                        </div>
+                                    </div>
 
-                            <div className="space-y-2">
-                                <label className="text-sm font-semibold text-[#1C1F34]">Work Email</label>
-                                <input type="email" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#2D7CFF] focus:ring-2 focus:ring-blue-100 outline-none transition-all bg-gray-50 focus:bg-white" placeholder="jane@company.com" />
-                            </div>
+                                    <div className="space-y-2">
+                                        <label className="text-sm font-semibold text-[#1C1F34]">Work Email</label>
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            value={formData.email}
+                                            onChange={handleInputChange}
+                                            required
+                                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#2D7CFF] focus:ring-2 focus:ring-blue-100 outline-none transition-all bg-gray-50 focus:bg-white"
+                                            placeholder="jane@company.com"
+                                        />
+                                    </div>
 
-                            <div className="space-y-2">
-                                <label className="text-sm font-semibold text-[#1C1F34]">Company Name</label>
-                                <input type="text" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#2D7CFF] focus:ring-2 focus:ring-blue-100 outline-none transition-all bg-gray-50 focus:bg-white" placeholder="Acme Industries" />
-                            </div>
+                                    <div className="space-y-2">
+                                        <label className="text-sm font-semibold text-[#1C1F34]">Company Name</label>
+                                        <input
+                                            type="text"
+                                            name="company"
+                                            value={formData.company}
+                                            onChange={handleInputChange}
+                                            required
+                                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#2D7CFF] focus:ring-2 focus:ring-blue-100 outline-none transition-all bg-gray-50 focus:bg-white"
+                                            placeholder="Acme Industries"
+                                        />
+                                    </div>
 
-                            <div className="space-y-2">
-                                <label className="text-sm font-semibold text-[#1C1F34]">Material Focus</label>
-                                <select className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#2D7CFF] focus:ring-2 focus:ring-blue-100 outline-none transition-all bg-gray-50 focus:bg-white text-gray-700">
-                                    <option value="">Select a category...</option>
-                                    <option value="metals">Metals (Steel, Copper, etc.)</option>
-                                    <option value="electronics">Electronics / PCBs</option>
-                                    <option value="chemicals">Chemicals</option>
-                                    <option value="plastics">Plastics / Polymers</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
+                                    <div className="space-y-2">
+                                        <label className="text-sm font-semibold text-[#1C1F34]">Material Focus</label>
+                                        <select
+                                            name="materialFocus"
+                                            value={formData.materialFocus}
+                                            onChange={handleInputChange}
+                                            required
+                                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#2D7CFF] focus:ring-2 focus:ring-blue-100 outline-none transition-all bg-gray-50 focus:bg-white text-gray-700"
+                                        >
+                                            <option value="">Select a category...</option>
+                                            <option value="metals">Metals (Steel, Copper, etc.)</option>
+                                            <option value="electronics">Electronics / PCBs</option>
+                                            <option value="chemicals">Chemicals</option>
+                                            <option value="plastics">Plastics / Polymers</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
 
-                            <Button size="lg" className="w-full justify-center mt-4 h-14 text-lg shadow-lg shadow-blue-500/20 group">
-                                Request Demo <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-                            </Button>
+                                    <Button
+                                        type="submit"
+                                        disabled={isSubmitting}
+                                        size="lg"
+                                        className="w-full justify-center mt-4 h-14 text-lg shadow-lg shadow-blue-500/20 group disabled:opacity-70"
+                                    >
+                                        {isSubmitting ? "Submitting..." : "Request Demo"}
+                                        {!isSubmitting && <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />}
+                                    </Button>
 
-                            <p className="text-xs text-center text-gray-400 mt-4">
-                                By submitting, you agree to our Terms and Privacy Policy.
-                            </p>
-                        </form>
+                                    <p className="text-xs text-center text-gray-400 mt-4">
+                                        By submitting, you agree to our Terms and Privacy Policy.
+                                    </p>
+                                </form>
+                            </>
+                        )}
                     </motion.div>
                 </div>
             </Container>
         </section>
     );
 }
+

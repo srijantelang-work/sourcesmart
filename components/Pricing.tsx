@@ -2,6 +2,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Check } from "lucide-react";
@@ -85,8 +86,8 @@ export function Pricing() {
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.1 }}
                             className={`relative p-8 rounded-2xl border flex flex-col ${plan.popular
-                                    ? "bg-background border-blue-500/50 shadow-2xl shadow-blue-500/10 scale-105 z-10"
-                                    : "bg-background/50 border-border shadow-sm hover:border-border/80"
+                                ? "bg-background border-blue-500/50 shadow-2xl shadow-blue-500/10 scale-105 z-10"
+                                : "bg-background/50 border-border shadow-sm hover:border-border/80"
                                 }`}
                         >
                             {plan.popular && (
@@ -113,11 +114,13 @@ export function Pricing() {
                                 ))}
                             </ul>
 
-                            <Button
-                                className={`w-full rounded-[8px] ${plan.popular ? 'bg-blue-600 hover:bg-blue-700 text-white' : 'bg-secondary text-foreground hover:bg-secondary/80'}`}
-                            >
-                                {plan.cta}
-                            </Button>
+                            <Link href="#contact">
+                                <Button
+                                    className={`w-full rounded-[8px] ${plan.popular ? 'bg-blue-600 hover:bg-blue-700 text-white' : 'bg-secondary text-foreground hover:bg-secondary/80'}`}
+                                >
+                                    {plan.cta}
+                                </Button>
+                            </Link>
                         </motion.div>
                     ))}
                 </div>

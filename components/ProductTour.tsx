@@ -2,6 +2,7 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useScroll, useTransform, motion, useInView } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
@@ -15,11 +16,9 @@ const tours = [
         description: "Stop relying on outdated directory listings. Access our real-time database of 50,000+ verified manufacturers with deep filters for certifications, capacity, and ESG scores.",
         benefits: ["ISO 9001 & 14001 Filters", "real-time Production Capacity", "3D Facility Tours"],
         image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2940&auto=format&fit=crop",
-        // Using high-q abstract/tech images if real UI screenshots aren't available, 
-        // otherwise I would use the file paths provided previously. 
-        // Reverting to previous file paths to be safe:
         localImage: "/real-supplier-discovery.png",
         icon: Search,
+        customIcon: null,
         accent: "text-blue-500",
         bg: "bg-blue-500/10"
     },
@@ -31,6 +30,7 @@ const tours = [
         benefits: ["Bulk RFQ Distribution", "Auto-Normalization of Bids", "Historical Price Benchmarking"],
         localImage: "/real-rfq.png",
         icon: Radio,
+        customIcon: "/project-management.png",
         accent: "text-purple-500",
         bg: "bg-purple-500/10"
     },
@@ -42,6 +42,7 @@ const tours = [
         benefits: ["Commodity Price Alerts", "Supply Chain Disruption Map", "Inflation Forecasts"],
         localImage: "/real-market-trends.png",
         icon: BarChart3,
+        customIcon: "/pie-chart.png",
         accent: "text-emerald-500",
         bg: "bg-emerald-500/10"
     },
@@ -53,10 +54,12 @@ const tours = [
         benefits: ["Natural Language Queries", "Instant Contract Drafting", "Negotiation Scripts"],
         localImage: "/real-ai-chat.png",
         icon: Bot,
+        customIcon: "/microchip.png",
         accent: "text-orange-500",
         bg: "bg-orange-500/10"
     }
 ];
+
 
 export function ProductTour() {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -168,8 +171,18 @@ function TourTextBlock({ tour, index, setActive }: { tour: any, index: number, s
 
     return (
         <div ref={ref} className="group min-h-0 lg:min-h-[50vh] flex flex-col justify-center lg:justify-start py-10 lg:py-0">
-            <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 transition-colors duration-500 ${tour.bg} ${tour.accent}`}>
-                <tour.icon size={24} />
+            <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 transition-colors duration-500 ${tour.bg}`}>
+                {tour.customIcon ? (
+                    <Image
+                        src={tour.customIcon}
+                        alt={tour.title}
+                        width={24}
+                        height={24}
+                        className="object-contain"
+                    />
+                ) : (
+                    <tour.icon size={24} className={tour.accent} />
+                )}
             </div>
 
             <h3 className="text-3xl font-bold mb-4 text-foreground flex items-center gap-4">
@@ -201,9 +214,11 @@ function TourTextBlock({ tour, index, setActive }: { tour: any, index: number, s
             </ul>
 
             <div className="mt-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
-                <Button variant="outline" className="gap-2">
-                    Learn more <ArrowRight className="w-4 h-4" />
-                </Button>
+                <Link href="#contact">
+                    <Button variant="outline" className="gap-2">
+                        Learn more <ArrowRight className="w-4 h-4" />
+                    </Button>
+                </Link>
             </div>
         </div>
     )

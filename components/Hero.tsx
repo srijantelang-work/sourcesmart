@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { motion } from "framer-motion";
@@ -46,12 +47,16 @@ export function Hero() {
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                            <Button size="lg" className="h-14 px-8 text-lg rounded-full bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-indigo-500/20 transition-all">
-                                Start Sourcing Free <ArrowRight className="ml-2 w-5 h-5" />
-                            </Button>
-                            <Button variant="outline" size="lg" className="h-14 px-8 text-lg rounded-full border border-border/50 bg-background/50 backdrop-blur-sm hover:bg-secondary transition-all">
-                                <PlayCircle className="mr-2 w-5 h-5" /> Watch Demo
-                            </Button>
+                            <Link href="#contact">
+                                <Button size="lg" className="h-14 px-8 text-lg rounded-full bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-indigo-500/20 transition-all">
+                                    Start Sourcing Free <ArrowRight className="ml-2 w-5 h-5" />
+                                </Button>
+                            </Link>
+                            <Link href="#contact">
+                                <Button variant="outline" size="lg" className="h-14 px-8 text-lg rounded-full border border-border/50 bg-background/50 backdrop-blur-sm hover:bg-secondary transition-all">
+                                    <PlayCircle className="mr-2 w-5 h-5" /> Watch Demo
+                                </Button>
+                            </Link>
                         </div>
                     </motion.div>
                 </div>

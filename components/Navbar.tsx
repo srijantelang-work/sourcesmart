@@ -2,7 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useTheme } from "next-themes";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { ModeToggle } from "@/components/ModeToggle";
@@ -14,6 +16,13 @@ export function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [activeSection, setActiveSection] = useState("");
+    const [mounted, setMounted] = useState(false);
+    const { theme, resolvedTheme } = useTheme();
+
+    // Ensure component is mounted before checking theme
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     // Handle scroll for glass effect and active section tracking
     useEffect(() => {
@@ -43,6 +52,10 @@ export function Navbar() {
         { name: "About", href: "#about" },
     ];
 
+    // Determine which logo to show based on theme
+    const isDark = mounted && (theme === 'dark' || resolvedTheme === 'dark');
+    const logoSrc = isDark ? "/S(2).png" : "/S_1_-removebg-preview.png";
+
     return (
         <nav
             className={cn(
@@ -59,10 +72,14 @@ export function Navbar() {
                 )}>
 
                     {/* Logo Section */}
-                    <Link href="/" className="flex items-center gap-2.5 group relative z-50">
-                        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-600 to-violet-600 text-white flex items-center justify-center font-bold text-lg shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-transform">
-                            S
-                        </div>
+                    <Link href="/" className="flex items-center gap-2 group relative z-50">
+                        <Image
+                            src={logoSrc}
+                            alt="SourceSmart Logo"
+                            width={40}
+                            height={40}
+                            className="group-hover:scale-105 transition-transform"
+                        />
                         <span className={cn(
                             "text-lg font-bold tracking-tight transition-colors",
                             isScrolled ? "text-foreground" : "text-foreground"
@@ -106,17 +123,13 @@ export function Navbar() {
                     <div className="hidden md:flex items-center gap-3 relative z-50">
                         <ModeToggle />
                         <div className="h-6 w-px bg-border/50 mx-1" />
-                        <Button
-                            variant="ghost"
-                            className="font-medium hover:bg-transparent hover:text-primary transition-colors"
-                        >
-                            Sign In
-                        </Button>
-                        <Button
-                            className="rounded-full px-6 shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all hover:scale-105"
-                        >
-                            Get Started
-                        </Button>
+                        <Link href="#contact">
+                            <Button
+                                className="rounded-full px-6 shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all hover:scale-105"
+                            >
+                                Get Started
+                            </Button>
+                        </Link>
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -155,9 +168,11 @@ export function Navbar() {
                                 </Link>
                             ))}
                             <div className="h-px bg-border/50 my-4" />
-                            <Button className="w-full rounded-xl py-6 text-lg">
-                                Get Started Now
-                            </Button>
+                            <Link href="#contact" className="w-full" onClick={() => setIsOpen(false)}>
+                                <Button className="w-full rounded-xl py-6 text-lg">
+                                    Get Started Now
+                                </Button>
+                            </Link>
                         </div>
                     </motion.div>
                 )}

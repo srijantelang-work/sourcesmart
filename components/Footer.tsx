@@ -1,12 +1,25 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { useTheme } from "next-themes";
 import { Container } from "@/components/ui/Container";
 import { Twitter, Linkedin, Facebook, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
 export function Footer() {
+    const [mounted, setMounted] = useState(false);
+    const { theme, resolvedTheme } = useTheme();
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    // Determine which logo to show based on theme
+    const isDark = mounted && (theme === 'dark' || resolvedTheme === 'dark');
+    const logoSrc = isDark ? "/S(2).png" : "/S_1_-removebg-preview.png";
+
     return (
         <footer className="bg-background dark:bg-[#020617] text-gray-600 dark:text-gray-400 border-t border-border dark:border-gray-800 relative overflow-hidden">
 
@@ -34,12 +47,16 @@ export function Footer() {
                             Join 500+ forward-thinking procurement teams sourcing faster with AI. Experience the future of purchasing today.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-5 justify-center">
-                            <Button size="lg" className="bg-white text-blue-700 hover:bg-blue-50 hover:scale-105 transition-all duration-300 border-none h-14 px-8 text-lg font-bold shadow-xl shadow-black/10">
-                                Get Started Free <ArrowRight className="ml-2 w-5 h-5" />
-                            </Button>
-                            <Button variant="outline" size="lg" className="border-white/30 text-white hover:bg-white/10 hover:border-white h-14 px-8 text-lg bg-transparent backdrop-blur-sm transition-all duration-300">
-                                Book a Demo
-                            </Button>
+                            <Link href="#contact">
+                                <Button size="lg" className="bg-white text-blue-700 hover:bg-blue-50 hover:scale-105 transition-all duration-300 border-none h-14 px-8 text-lg font-bold shadow-xl shadow-black/10">
+                                    Get Started Free <ArrowRight className="ml-2 w-5 h-5" />
+                                </Button>
+                            </Link>
+                            <Link href="#contact">
+                                <Button variant="outline" size="lg" className="border-white/30 text-white hover:bg-white/10 hover:border-white h-14 px-8 text-lg bg-transparent backdrop-blur-sm transition-all duration-300">
+                                    Book a Demo
+                                </Button>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -47,9 +64,12 @@ export function Footer() {
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-12 mb-16">
                     <div className="col-span-2 lg:col-span-2">
                         <Link href="/" className="flex items-center space-x-2 mb-6">
-                            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-blue-500/30">
-                                S
-                            </div>
+                            <Image
+                                src={logoSrc}
+                                alt="SourceSmart Logo"
+                                width={40}
+                                height={40}
+                            />
                             <span className="text-2xl font-bold text-foreground dark:text-white tracking-tight">
                                 SourceSmart
                             </span>
@@ -57,11 +77,6 @@ export function Footer() {
                         <p className="text-base mb-8 leading-relaxed max-w-sm">
                             The intelligent procurement platform for modern manufacturing and supply chain teams.
                         </p>
-                        <div className="flex space-x-4">
-                            <SocialLink href="#" icon={Twitter} />
-                            <SocialLink href="#" icon={Linkedin} />
-                            <SocialLink href="#" icon={Facebook} />
-                        </div>
                     </div>
 
                     <div>
@@ -84,9 +99,9 @@ export function Footer() {
                     <div>
                         <h4 className="text-foreground dark:text-white font-bold mb-6 text-lg">Legal</h4>
                         <ul className="space-y-4 text-base">
-                            <FooterLink href="#">Privacy Policy</FooterLink>
-                            <FooterLink href="#">Terms of Service</FooterLink>
-                            <FooterLink href="#">Security</FooterLink>
+                            <FooterLink href="/privacy">Privacy Policy</FooterLink>
+                            <FooterLink href="/terms">Terms of Service</FooterLink>
+                            <FooterLink href="#contact">Security</FooterLink>
                         </ul>
                     </div>
                 </div>
@@ -94,9 +109,9 @@ export function Footer() {
                 <div className="pt-8 border-t border-border dark:border-white/10 flex flex-col md:flex-row justify-between items-center text-sm font-medium">
                     <div className="opacity-70">&copy; {new Date().getFullYear()} SourceSmart AI. All rights reserved.</div>
                     <div className="mt-4 md:mt-0 space-x-8 opacity-70">
-                        <Link href="#" className="hover:text-primary dark:hover:text-white transition-colors">Privacy</Link>
-                        <Link href="#" className="hover:text-primary dark:hover:text-white transition-colors">Terms</Link>
-                        <Link href="#" className="hover:text-primary dark:hover:text-white transition-colors">Cookies</Link>
+                        <Link href="/privacy" className="hover:text-primary dark:hover:text-white transition-colors">Privacy</Link>
+                        <Link href="/terms" className="hover:text-primary dark:hover:text-white transition-colors">Terms</Link>
+                        <Link href="/privacy" className="hover:text-primary dark:hover:text-white transition-colors">Cookies</Link>
                     </div>
                 </div>
             </Container>
